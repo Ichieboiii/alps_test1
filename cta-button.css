@@ -1,0 +1,103 @@
+/* ============================================================
+   COURSES CTA BUTTON — append to styles.css
+   (or load as a separate <link> before </head> in index.html)
+   ============================================================ */
+
+/* Wrapper: centers the button with breathing room */
+.courses-cta-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 2.5rem 0 0.5rem;
+}
+
+/* The button */
+.courses-cta-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    overflow: hidden;
+
+    /* Base look — outlined in accent green on the dark section bg */
+    background-color: transparent;
+    border: 1.5px solid var(--clr-accent);
+    color: var(--clr-accent);
+    font-family: var(--ff-header);
+    font-size: 1rem;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 0.9rem 2.25rem;
+    border-radius: 50px;
+
+    /* Transitions */
+    transition:
+        color 0.35s ease,
+        border-color 0.35s ease,
+        transform 0.25s ease,
+        box-shadow 0.35s ease;
+}
+
+/* Animated fill that slides in from the left on hover */
+.courses-cta-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--clr-accent);
+    transform: translateX(-105%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: inherit;
+    z-index: 0;
+}
+
+/* Text and icon sit above the fill */
+.courses-cta-btn span,
+.courses-cta-btn svg {
+    position: relative;
+    z-index: 1;
+}
+
+/* Arrow icon */
+.courses-cta-btn svg {
+    width: 1.1em;
+    height: 1.1em;
+    stroke: currentColor;
+    fill: none;
+    flex-shrink: 0;
+    transition: transform 0.25s ease, stroke 0.35s ease;
+}
+
+/* Hover state */
+.courses-cta-btn:hover {
+    color: var(--clr-primary);
+    border-color: var(--clr-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 193, 142, 0.35);
+}
+
+.courses-cta-btn:hover::before {
+    transform: translateX(0);
+}
+
+/* Arrow nudges right on hover */
+.courses-cta-btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* Active / click feedback */
+.courses-cta-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 193, 142, 0.25);
+}
+
+/* Pulse ring — draws attention on first scroll-into-view */
+@keyframes ctaPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(0, 193, 142, 0.45); }
+    70%  { box-shadow: 0 0 0 14px rgba(0, 193, 142, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 193, 142, 0); }
+}
+
+.courses-cta-btn.pulse-once {
+    animation: ctaPulse 0.9s ease-out forwards;
+}
